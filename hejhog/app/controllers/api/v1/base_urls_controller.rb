@@ -12,6 +12,11 @@ class Api::V1::BaseUrlsController < ApplicationController
     base_url = BaseUrl.create(base_url_params)
   end
 
+  def show
+    url = BaseUrl.find(params[:id])
+    render json: url, include: [main_paths: {only: [:id, :main_branch]}], only: [:id, :site_name, :base_url]
+  end
+
   private
 
   def base_url_params
