@@ -1,0 +1,298 @@
+  [1m[35m (15.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (47.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(998029593238912710);[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBaseUrls (20170530142252)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.5ms)[0m  [1m[35mCREATE TABLE "base_urls" ("id" bigserial primary key, "site_name" character varying, "base_url" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530142252"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMainPaths (20170530142712)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "main_paths" ("id" bigserial primary key, "main_branch" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530142712"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBaseAndMainPaths (20170530142838)
+  [1m[35m (5.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "base_and_main_paths" ("id" bigserial primary key, "base_url_id" integer, "main_path_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530142838"]]
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-05-30 14:31:23.844800"], ["updated_at", "2017-05-30 14:31:23.844800"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(998029593238912710)[0m
+  [1m[35m (6.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (12.4ms)[0m  [1m[32mINSERT INTO "base_urls" ("site_name", "base_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["site_name", "Star Wars"], ["base_url", "http://swapi.co/api/"], ["created_at", "2017-05-30 15:09:19.676839"], ["updated_at", "2017-05-30 15:09:19.676839"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "base_urls" ("site_name", "base_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["site_name", "Pokemon"], ["base_url", "http://www.pokeapi.co/api/v2/"], ["created_at", "2017-05-30 15:09:19.691437"], ["updated_at", "2017-05-30 15:09:19.691437"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_urls" ("site_name", "base_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["site_name", "An API of Ice and Fire"], ["base_url", "https://anapioficeandfire.com/api/"], ["created_at", "2017-05-30 15:09:19.693434"], ["updated_at", "2017-05-30 15:09:19.693434"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "people/"], ["created_at", "2017-05-30 15:09:19.705750"], ["updated_at", "2017-05-30 15:09:19.705750"]]
+  [1m[35m (6.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "planets/"], ["created_at", "2017-05-30 15:09:19.716327"], ["updated_at", "2017-05-30 15:09:19.716327"]]
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "films/"], ["created_at", "2017-05-30 15:09:19.723280"], ["updated_at", "2017-05-30 15:09:19.723280"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "species/"], ["created_at", "2017-05-30 15:09:19.725168"], ["updated_at", "2017-05-30 15:09:19.725168"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "vehicles/"], ["created_at", "2017-05-30 15:09:19.727062"], ["updated_at", "2017-05-30 15:09:19.727062"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "starships/"], ["created_at", "2017-05-30 15:09:19.728961"], ["updated_at", "2017-05-30 15:09:19.728961"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "pokemon/"], ["created_at", "2017-05-30 15:09:19.730727"], ["updated_at", "2017-05-30 15:09:19.730727"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "type/"], ["created_at", "2017-05-30 15:09:19.732585"], ["updated_at", "2017-05-30 15:09:19.732585"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "ability/"], ["created_at", "2017-05-30 15:09:19.734434"], ["updated_at", "2017-05-30 15:09:19.734434"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "pokemon-habitat/"], ["created_at", "2017-05-30 15:09:19.736095"], ["updated_at", "2017-05-30 15:09:19.736095"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "pokedex/"], ["created_at", "2017-05-30 15:09:19.737819"], ["updated_at", "2017-05-30 15:09:19.737819"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "books/"], ["created_at", "2017-05-30 15:09:19.739737"], ["updated_at", "2017-05-30 15:09:19.739737"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "characters/"], ["created_at", "2017-05-30 15:09:19.741561"], ["updated_at", "2017-05-30 15:09:19.741561"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "main_paths" ("main_branch", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["main_branch", "houses/"], ["created_at", "2017-05-30 15:09:19.743297"], ["updated_at", "2017-05-30 15:09:19.743297"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (12.7ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.3ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (13.4ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 1], ["created_at", "2017-05-30 15:09:19.788389"], ["updated_at", "2017-05-30 15:09:19.788389"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.3ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 2], ["created_at", "2017-05-30 15:09:19.812311"], ["updated_at", "2017-05-30 15:09:19.812311"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.3ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 3], ["created_at", "2017-05-30 15:09:19.817060"], ["updated_at", "2017-05-30 15:09:19.817060"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 4], ["created_at", "2017-05-30 15:09:19.821539"], ["updated_at", "2017-05-30 15:09:19.821539"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.3ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 5], ["created_at", "2017-05-30 15:09:19.826009"], ["updated_at", "2017-05-30 15:09:19.826009"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 1], ["main_path_id", 6], ["created_at", "2017-05-30 15:09:19.830606"], ["updated_at", "2017-05-30 15:09:19.830606"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.1ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 2], ["main_path_id", 7], ["created_at", "2017-05-30 15:09:19.835021"], ["updated_at", "2017-05-30 15:09:19.835021"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 2], ["main_path_id", 8], ["created_at", "2017-05-30 15:09:19.839360"], ["updated_at", "2017-05-30 15:09:19.839360"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 2], ["main_path_id", 9], ["created_at", "2017-05-30 15:09:19.843718"], ["updated_at", "2017-05-30 15:09:19.843718"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 2], ["main_path_id", 10], ["created_at", "2017-05-30 15:09:19.848638"], ["updated_at", "2017-05-30 15:09:19.848638"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 2], ["main_path_id", 11], ["created_at", "2017-05-30 15:09:19.852905"], ["updated_at", "2017-05-30 15:09:19.852905"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 3], ["main_path_id", 12], ["created_at", "2017-05-30 15:09:19.857140"], ["updated_at", "2017-05-30 15:09:19.857140"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 3], ["main_path_id", 13], ["created_at", "2017-05-30 15:09:19.861608"], ["updated_at", "2017-05-30 15:09:19.861608"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBaseUrl Load (0.2ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" WHERE "base_urls"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mMainPath Load (0.2ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" WHERE "main_paths"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "base_and_main_paths" ("base_url_id", "main_path_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["base_url_id", 3], ["main_path_id", 14], ["created_at", "2017-05-30 15:09:19.866236"], ["updated_at", "2017-05-30 15:09:19.866236"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT  "base_urls".* FROM "base_urls" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBaseAndMainPath Load (0.5ms)[0m  [1m[34mSELECT  "base_and_main_paths".* FROM "base_and_main_paths" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mMainPath Load (0.5ms)[0m  [1m[34mSELECT  "main_paths".* FROM "main_paths" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for 127.0.0.1 at 2017-05-30 11:10:19 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/nothinlkepaisley/.rvm/gems/ruby-2.3.1/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/nothinlkepaisley/.rvm/gems/ruby-2.3.1/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb (4.2ms)
+Completed 200 OK in 13ms (Views: 9.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2017-05-30 11:10:20 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/index" for 127.0.0.1 at 2017-05-30 11:10:24 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.1) lib/rack/cors.rb:81:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:10:30 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.8ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 200 OK in 21ms (Views: 8.5ms | ActiveRecord: 5.8ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:15:05 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.6ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:15:16 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (18.5ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 200 OK in 21ms (Views: 2.1ms | ActiveRecord: 18.5ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:15:55 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.7ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:18:24 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `base_urls' for #<Api::V1::BaseUrlsController:0x007f991b7a5768>
+Did you mean?  base_url_params):
+  
+app/controllers/api/v1/base_urls_controller.rb:4:in `index'
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:18:40 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 6.3ms)
+
+
+  
+NoMethodError (undefined method `main_path' for #<BaseUrl:0x007f991a6c8a08>
+Did you mean?  main_paths
+               main_paths=):
+  
+app/controllers/api/v1/base_urls_controller.rb:4:in `index'
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:18:50 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+  [1m[36mMainPath Load (7.0ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 1]]
+  [1m[36mMainPath Load (0.7ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 2]]
+  [1m[36mMainPath Load (0.5ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 3]]
+Completed 200 OK in 102ms (Views: 74.1ms | ActiveRecord: 22.1ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:19:51 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (2.8ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+  [1m[36mMainPath Load (0.4ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 1]]
+  [1m[36mMainPath Load (0.5ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 2]]
+  [1m[36mMainPath Load (2.5ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 3]]
+Completed 200 OK in 63ms (Views: 34.4ms | ActiveRecord: 20.5ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:20:09 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+Completed 200 OK in 16ms (Views: 6.4ms | ActiveRecord: 5.2ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:21:22 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.3ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+  [1m[36mMainPath Load (0.5ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 1]]
+  [1m[36mMainPath Load (0.5ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 2]]
+  [1m[36mMainPath Load (0.4ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 3]]
+Completed 200 OK in 52ms (Views: 32.8ms | ActiveRecord: 14.6ms)
+
+
+Started GET "//api/v1/base_urls" for 127.0.0.1 at 2017-05-30 11:23:55 -0400
+Processing by Api::V1::BaseUrlsController#index as HTML
+  [1m[36mBaseUrl Load (0.5ms)[0m  [1m[34mSELECT "base_urls".* FROM "base_urls"[0m
+  [1m[36mMainPath Load (0.4ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 1]]
+  [1m[36mMainPath Load (0.4ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 2]]
+  [1m[36mMainPath Load (1.4ms)[0m  [1m[34mSELECT "main_paths".* FROM "main_paths" INNER JOIN "base_and_main_paths" ON "main_paths"."id" = "base_and_main_paths"."main_path_id" WHERE "base_and_main_paths"."base_url_id" = $1[0m  [["base_url_id", 3]]
+Completed 200 OK in 79ms (Views: 50.7ms | ActiveRecord: 20.2ms)
+
+
