@@ -4,7 +4,7 @@
 <a href='https://www.youtube.com/watch?v=Iff_zod9QfY'>DEMO VIDEO</a>
 
 # Introduction
-A application to make reading and using APIs much less stressful. Using a jQuery and Javascript front-end in conjunction with a Ruby on Rails backend, application parses through APIs to render out readable and searchable data in a user-friendly interface.
+An application to make reading and using APIs much less stressful. Using a jQuery and Javascript front-end in conjunction with a Ruby on Rails backend, application parses through APIs to render out readable and searchable data in a user-friendly interface.
 
 # Site in Action
 ## Homepage
